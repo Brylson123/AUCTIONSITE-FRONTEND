@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import {Route, Routes,} from "react-router-dom";
+import {Offers} from "./components/offers/Offers";
+import {Header} from "./components/layout/Header";
+import {SearchContext} from './contexts/search.context';
 import './App.css';
+import {AddForm} from "./components/AddForm/AddForm";
+import {SingleOffer} from "./components/offers/singleOffer";
+import {Login} from "./components/Login/Login";
+import {Register} from "./components/Register/Register";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export const App = () => {
+    const [search, setSearch] = useState('')
+
+    return (
+        <SearchContext.Provider value={{search, setSearch}}>
+            <Header/>
+            <Routes>
+                <Route path='/' element={<Offers/>}/>
+                <Route path='/add' element={<AddForm/>}/>
+                <Route path='/offer/:id' element={<SingleOffer/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
+            </Routes>
+        </SearchContext.Provider>
+    );
 }
 
-export default App;
+
