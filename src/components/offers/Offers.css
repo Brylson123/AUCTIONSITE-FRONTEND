@@ -1,0 +1,21 @@
+div.offer-list {
+    width: 80%;
+    height: calc(100vh - 100px);
+    margin: 5px auto;
+    /*border: 1px solid black;*/
+
+
+}
+Link p, h1{
+    text-decoration: none;
+}
+.single-item h1 {
+    font-size: 300%;
+}
+.noOffers {
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
