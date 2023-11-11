@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Container} from "@mui/material";
 import {Btn} from "../common/Btn";
 
@@ -66,7 +66,7 @@ export const SingleOffer = () => {
                 height: '80vh'
             }}>
                 {!!offer.price && <p><b>{offer.price} zł</b></p>}
-                <Btn text={'Kup teraz!'}/>
+                <Link to={`/offer/buy/${id}`}><Btn text={'Kup teraz!'}/></Link>
             </Container>
         </Container>
     </>

@@ -12,6 +12,7 @@ import {Logout} from "./logout/Logout";
 import {AuthContext} from "./contexts/auth.context";
 import {UserContext} from "./contexts/user.context";
 import {Dashboard} from "./components/dashboard/Dashboard";
+import {BuyOffer} from "./components/offers/BuyOffer";
 
 
 
@@ -34,6 +35,7 @@ export const App = () => {
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/logout' element={<Logout/>}/>
                 <Route path='/dashboard' element={<Dashboard/>}/>
+                <Route path='/offer/buy/:id' element={<BuyOffer/>}/>
             </Routes>
         </SearchContext.Provider>
         </AuthContext.Provider>
