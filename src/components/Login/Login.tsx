@@ -61,7 +61,7 @@ export const Login = () => {
     };
 
     if (loading) {
-        return <h2>Trwa dodawanie ogłoszenia...</h2>
+        return <h2>Trwa logowanie</h2>
     }
     if (login === true) {
         return <h2>Zalogowałeś się</h2>
@@ -69,7 +69,7 @@ export const Login = () => {
     }
 
     if (login === 'login invalid') {
-        return <h2>{login}</h2>
+        return <h2>Niepoprawne dane logowania</h2>
     }
 
     const updateUser = (key: string, value: any) => {
