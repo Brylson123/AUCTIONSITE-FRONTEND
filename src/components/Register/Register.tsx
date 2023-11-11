@@ -8,8 +8,20 @@ export const Register = () => {
     });
     const [id, setId] = useState('')
     const [loading, setLoading] = useState(false)
+    const [emailError, setEmailError] = useState('');
+
+    const validateEmail = (email: string) => {
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return emailRegex.test(email);
+    };
+
     const saveUser = async (e: SyntheticEvent) => {
         e.preventDefault();
+
+        if (!validateEmail(user.email)) {
+            setEmailError('Niepoprawny format adresu e-mail');
+            return;
+        }
 
         setLoading(true);
 
@@ -45,6 +57,9 @@ export const Register = () => {
             ...form,
             [key]: value,
         }))
+        if (key === 'email') {
+            setEmailError('');
+        }
     }
     return (
         <form className='add-form' action="" onSubmit={saveUser}>
@@ -60,6 +75,7 @@ export const Register = () => {
                            onChange={e => updateUser('email', e.target.value)}
                     />
                 </label>
+                {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
             </p>
             <p>
                 <label>
