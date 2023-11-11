@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {SyntheticEvent, useEffect, useState} from 'react';
 import {Btn} from "../common/Btn";
 
 import './AddForm.css'
@@ -14,13 +14,13 @@ export const AddForm = () => {
     const [id, setId] = useState('')
     const [file, setFile] = useState<File | null>(null);
     const [message, setMessage] = useState(false)
+
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files && e.target.files[0];
         if (selectedFile) {
             setFile(selectedFile);
         }
     };
-
     const saveOffer = async (e: SyntheticEvent) => {
         e.preventDefault();
 
@@ -39,11 +39,12 @@ export const AddForm = () => {
             const res = await fetch(`http://localhost:3001/offers/add`, {
                 method: 'POST',
                 body: formData,
+                credentials: 'include',
             });
 
             const data = await res.json()
 
-            if(data.message) {
+            if (data.message) {
                 setMessage(true);
             }
             console.log(data.message)
@@ -55,7 +56,7 @@ export const AddForm = () => {
         }
     };
 
-    if(message) {
+    if (message) {
         return <h1>Musisz być zalogowany aby dodać oferte!</h1>
     }
 

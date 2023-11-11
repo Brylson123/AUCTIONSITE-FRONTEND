@@ -46,7 +46,6 @@ export const Offers = () => {
                         <Grid item xs={8} sm={5} xl={3}>
                             <Item className="single-item" key={offer.id} >
                                 <Link to={`/offer/${offer.id}`}>
-
                                     <div className="offers-table">
                                         <img src={`http://localhost:3001/offers/photo/${offer.id}`} alt={offer.name}
                                              style={{maxWidth: '100%', maxHeight: '400px'}}/>

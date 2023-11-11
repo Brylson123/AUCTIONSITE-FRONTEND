@@ -1,5 +1,9 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {SyntheticEvent, useContext, useState} from 'react';
 import {Btn} from "../common/Btn";
+import {AuthContext} from "../../contexts/auth.context";
+import {UserContext} from "../../contexts/user.context";
+
+
 
 
 
@@ -8,9 +12,11 @@ export const Login = () => {
         email: '',
         pwd: ''
     });
-    // const [cookies, removeCookies] = useCookies([])
+    const{auth, setAuth} = useContext(AuthContext)
+    const{userName, setUserName} = useContext(UserContext)
     const [login, setLogin] = useState()
     const [loading, setLoading] = useState(false)
+
     const saveUser = async (e: SyntheticEvent) => {
         e.preventDefault();
 
@@ -21,7 +27,7 @@ export const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Access-Control-Allow-Credentials": 'true',
+                    'Access-Control-Allow-Credentials': 'true',
                     'Access-Control-Allow-Origin': "http://localhost:3001",
                     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
                 },
@@ -29,25 +35,25 @@ export const Login = () => {
                     ...user,
                 }),
 
-                // credentials: 'include'
+                credentials: "include"
             });
 
 
             const data = await res.json()
-            // const cookie = data.headers.get('Set-Cookie')
-            // Cookies.set("jwt", cookie)
+
             if (data.ok) {
                 setLogin(data.ok);
+                setAuth(true)
+                setUserName(data.name)
+
             }
             if (data.message === 'login invalid') {
                 setLogin(data.message);
+                setAuth(false)
             }
 
 
-            // const jwtToken = Cookies.get('jwt')
-            // if(jwtToken) {
-            //     Cookies.set('jwt', jwtToken)
-            // }
+
         } finally {
             setLoading(false);
 
@@ -59,6 +65,7 @@ export const Login = () => {
     }
     if (login === true) {
         return <h2>Zalogowałeś się</h2>
+
     }
 
     if (login === 'login invalid') {

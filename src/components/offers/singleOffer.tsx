@@ -65,9 +65,8 @@ export const SingleOffer = () => {
                 alignItems: 'center',
                 height: '80vh'
             }}>
-                <Btn text={'Kup teraz!'}/>
                 {!!offer.price && <p><b>{offer.price} zł</b></p>}
-                {offer.user}
+                <Btn text={'Kup teraz!'}/>
             </Container>
         </Container>
     </>

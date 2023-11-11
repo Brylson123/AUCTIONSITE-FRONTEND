@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {Link} from "react-router-dom";
 import {Badge, Button, Menu, MenuItem} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
+import {AuthContext} from "../../contexts/auth.context";
 
 
 
@@ -57,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Header = () => {
+    const{auth, setAuth} = useContext(AuthContext)
     const{search, setSearch} = useContext(SearchContext)
     const [inputVal, setInputVal] = useState(search)
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -106,8 +108,9 @@ export const Header = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}><Link to={'/login'}>Login</Link></MenuItem>
-            <MenuItem onClick={handleMenuClose}><Link to={'/register'}>Register</Link></MenuItem>
+            {auth ?<div><MenuItem onClick={handleMenuClose}><Link to={'/dashboard'}>Dashboard</Link></MenuItem><MenuItem onClick={handleMenuClose}><Link to={'/logout'}>Logout</Link></MenuItem></div> : <div><MenuItem onClick={handleMenuClose}><Link to={'/login'}>Login</Link></MenuItem>
+                <MenuItem onClick={handleMenuClose}><Link to={'/register'}>Register</Link></MenuItem> </div> }
+
         </Menu>
     );
 
