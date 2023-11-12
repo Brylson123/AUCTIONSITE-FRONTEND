@@ -14,5 +14,6 @@ React, Typescipt, Material UI
 2. In Ide console type 
     npm i
 3. Type in Ide console "react-scripts start" or go to npm script and click "start" script
+___
 !You have to launch backend to work - 
     https://github.com/Brylson123/AUCTIONSITE-BACKEND!
